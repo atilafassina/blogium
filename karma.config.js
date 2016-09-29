@@ -6,7 +6,7 @@ module.exports = function(karma) {
     basePath: '',
     frameworks: ['mocha', 'chai'],
 
-    reporters: ['mocha'],
+    reporters: ['mocha', 'istanbul'],
     port: 9876,
     colors: true,
     logLevel: karma.LOG_INFO,
@@ -23,8 +23,6 @@ module.exports = function(karma) {
       './src/blogium.js': ['webpack'],
       './tests/blogium.js': ['webpack']
     },
-
-    browsers: ['Firefox'],
 
     webpack: webpackConfig,
 

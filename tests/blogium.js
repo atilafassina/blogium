@@ -1,8 +1,8 @@
 import Blogium from '../src/blogium.js';
 
 describe('Blogium', () => {
-  before(() => {
 
+  before(() => {
     global.wrapper = document.createElement('div');
     global.wrapper.setAttribute('class', 'mediumWrap');
 
@@ -13,11 +13,53 @@ describe('Blogium', () => {
     document.body.appendChild(global.moreBtn);
   });
 
-  it('check if Blog is an instance of Blogium', () => {
-    const blog = new Blogium({
-      host: 'http://atilafassina.com'
+  describe('#constructor', () => {
+    it('check if Blog is an instance of Blogium', () => {
+      const blog = new Blogium({
+        host: 'atilafassina.com'
+      });
+
+      assert.instanceOf(blog, Blogium, 'blog is an instance of Blogium');
+    });
+  });
+
+  describe('#setLinkTarget', () => {
+    it('should change target of outbound links to _blank', () => {
+      const blog = new Blogium({
+        host: 'atilafassina.com'
+      });
+
+      for(let i=0; i < 10; i++) {
+        let newLink = document.createElement('a');
+        newLink.href = 'github.com';
+        newLink.setAttribute('target', '_self');
+        global.wrapper.appendChild(newLink);
+      }
+
+      blog.setLinkTarget(global.wrapper);
+
+      assert.equal(global.wrapper.querySelector('a').getAttribute('target'), '_blank', 'target is blank');
+
+      global.wrapper.innerHTML='';
     });
 
-    assert.instanceOf(blog, Blogium, 'blog is an instance of Blogium');
+    it('should keep target of inbound links as _self', () => {
+      const blog = new Blogium({
+        host: 'atilafassina.com'
+      });
+
+      for(let i=0; i < 10; i++) {
+        let otherLink = document.createElement('a');
+        otherLink.href = 'http://atilafassina.com';
+        otherLink.setAttribute('target', '_self');
+        global.wrapper.appendChild(otherLink);
+      }
+
+      blog.setLinkTarget(global.wrapper);
+
+      assert.equal(global.wrapper.querySelector('a').getAttribute('target'), '_self', 'target is _self');
+    });
   });
 });
+
+

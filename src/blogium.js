@@ -49,7 +49,11 @@ export default class Blogium extends Emitter {
     const allLinks = Array.from(scope.querySelectorAll('a'));
 
     allLinks.forEach((element) => {
-      element.href.includes(this.host) ? element.target = '_self' : element.target = '_blank';
+      if (element.href.includes(this.host)) {
+        element.target = '_self';
+      } else {
+        element.target = '_blank';
+      }
     });
 
   }
