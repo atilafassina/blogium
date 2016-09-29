@@ -24,6 +24,12 @@ describe('Blogium', () => {
   });
 
   describe('#setLinkTarget', () => {
+    if (typeof Array.from !== 'function') {
+      Array.from = function(list) {
+        return [].slice.call(list);
+      }
+    }
+
     it('should change target of outbound links to _blank', () => {
       const blog = new Blogium({
         host: 'atilafassina.com'

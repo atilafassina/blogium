@@ -6,7 +6,7 @@ module.exports = function(karma) {
     basePath: '',
     frameworks: ['mocha', 'chai'],
 
-    reporters: ['mocha', 'istanbul'],
+    reporters: ['mocha'],
     port: 9876,
     colors: true,
     logLevel: karma.LOG_INFO,
