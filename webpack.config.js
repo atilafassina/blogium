@@ -1,7 +1,9 @@
 'use strict';
 
 module.exports = {
-  entry: ['./src/blogium'],
+  entry: [
+  './src/blogium'
+  ],
   output: {
     path: './dist',
     filename: 'blogium.js'

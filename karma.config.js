@@ -1,15 +1,15 @@
 var webpackConfig = require('./webpack.config.js');
 webpackConfig.entry = {};
 
-module.exports = function(config) {
-  config.set({
+module.exports = function(karma) {
+  karma.set({
     basePath: '',
     frameworks: ['mocha', 'chai'],
 
-    reporters: ['progress'],
+    reporters: ['mocha'],
     port: 9876,
     colors: true,
-    logLevel: config.LOG_INFO,
+    logLevel: karma.LOG_INFO,
     autoWatch: true,
     browsers: ['Chrome'],
     singleRun: true,

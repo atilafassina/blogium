@@ -1,29 +1,30 @@
-import * as defaults from './defaultOptions.js';
+import Emitter from '../node_modules/tiny-emitter/dist/tinyemitter.js';
+import defaults from './defaultOptions.js';
 
-export default class Blogium {
+export default class Blogium extends Emitter {
   constructor(options) {
+    super();
 
-    this.config(options = defaults);
+    this.config(options);
     this.getPosts();
 
-    this.moreBtn.addEventListener('click', this.morePosts, false);
+    this.moreBtn.addEventListener('click', this.morePosts.bind(this), false);
   }
 
-  config(options, defaults) {
-    this.host = document.location.host;
-    this.moreBtn = document.querySelector('#moreBtn');
-
-    // this.template = options.template || defaults.template;
-    // this.url = urlBuilder(options.username);
+  config(options) {
+    this.otherPosts = undefined;
+    this.host = options.host || defaults.host;
+    this.targetBlank = options.targetBlank || defaults.targetBlank;
+    this.url = `http://rss2json.com/api.json?rss_url=https://medium.com/feed/${options.username || defaults.username}`;
+    this.moreBtn = document.querySelector(options.moreBtn) || document.querySelector(defaults.moreBtn);
+    this.wrapper = document.querySelector(options.wrapper) || document.querySelector(defaults.wrapper);
   }
 
   getPosts() {
     let getPosts = new Promise((resolve, reject) => {
       let posts = new XMLHttpRequest();
-      const url = "http://rss2json.com/api.json?rss_url=https://medium.com/feed/@atilafassina"
-      // const url = this.url;
 
-      posts.open("GET", url, true);
+      posts.open("GET", this.url, true);
 
       posts.onreadystatechange = function () {
         if (posts.readyState === 4 && posts.status === 200) {
@@ -35,15 +36,17 @@ export default class Blogium {
 
       posts.send();
     })
-    .then((postList)=> { this.renderPosts(postList.items)})
+    .then((postList)=> {
+      this.emit('blogium.success', postList);
+      this.renderPosts(postList.items)
+    })
     .catch((response) => {
-      // fire error event with response parameter
-      console.error(response);
+      this.emit('blogium.error', response);
     });
   }
 
-  setLinkTarget() {
-    const allLinks = Array.from(document.querySelectorAll('a'));
+  setLinkTarget(scope = document) {
+    const allLinks = Array.from(scope.querySelectorAll('a'));
 
     allLinks.forEach((element) => {
       element.href.includes(this.host) ? element.target = '_self' : element.target = '_blank';
@@ -73,16 +76,15 @@ export default class Blogium {
     });
 
     ul.innerHTML = cachedPosts;
-    mediumWrap.appendChild(ul);
-
-    this.setLinkTarget();
+    this.setLinkTarget(ul);
+    this.wrapper.appendChild(ul);
   }
 
   morePosts() {
-    if(!otherPosts) return;
-    moreBtn.disabled = true;
+    if(!this.otherPosts) return;
+    this.moreBtn.disabled = true;
 
-    this.renderPosts(otherPosts);
+    this.renderPosts(this.otherPosts);
   }
 
   blogPostTemplate(post) {
@@ -99,6 +101,3 @@ export default class Blogium {
       </li>`;
   };
 }
-
-// for the demo
-// let foo = new Blogium()
