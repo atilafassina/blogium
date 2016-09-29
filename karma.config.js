@@ -11,7 +11,7 @@ module.exports = function(karma) {
     colors: true,
     logLevel: karma.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: ['Firefox'],
     singleRun: true,
     autoWatchBatchDelay: 300,
 
@@ -24,7 +24,7 @@ module.exports = function(karma) {
       './tests/blogium.js': ['webpack']
     },
 
-    browsers: ['Chrome'],
+    browsers: ['Firefox'],
 
     webpack: webpackConfig,
 
