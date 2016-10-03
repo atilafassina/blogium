@@ -1,0 +1,169 @@
+body {
+  font-family: sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  background-color: whitesmoke;
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+}
+
+a:focus,
+a:hover {
+  color: #888;
+}
+
+.top {
+  width: 100vw;
+  height: 50vh;
+  background-color: #000;
+  color: #f1f1f1;
+  font-size: 2em;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottom {
+  background-color: #DDD;
+  color: #666;
+  margin-top: 2rem;
+  padding: 1em 0 .5em;
+  text-align: center;
+  font-size: .8em;
+}
+
+.demo {
+  margin: 3rem auto 0;
+  width: 80vw;
+}
+
+.demo_postList {
+  min-height: 30vh;
+  max-height: 80vh;
+  background-color: #fff;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.demo_btn {
+  outline: none;
+  display: block;
+  font-size: 1.2rem;
+  padding: 1em 5em;
+  margin: 2em auto;
+  background-color: transparent;
+  border: solid 1px #DDD;
+  color: #666;
+  cursor: pointer;
+}
+
+.demo_btn:hover,
+.demo_btn:focus {
+  background-color: #DDD;
+}
+
+.demo_btn[disabled] {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+.changeUser {
+  display: block;
+  background: #DDD;
+  color: #666;
+  padding: 1em 0 .5em 1em;
+}
+
+.changeUser_url {
+  font-size: 1.5rem;
+}
+
+.changeUser_input {
+  font-size: 1.5rem;
+  width: 10em;
+  margin-right: 2em;
+  background: transparent;
+  outline: none;
+  border: none;
+  border-bottom: dashed 2px #666;
+
+}
+
+.changeUser_btn {
+  font-size: 1.5rem;
+  padding: .5em 1.5em;
+  background-color: transparent;
+  border: solid 2px #999;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.changeUser_btn:focus,
+.changeUser_btn:hover {
+  color: firebrick;
+  border-color: firebrick;
+}
+
+.postList {
+  list-style-type: none;
+  margin: 0 auto;
+}
+
+@media (min-width: 42.5em) {
+  .postList {
+    width: 60%;
+  }
+}
+
+@media (min-width: 50.5em) {
+  .postList {
+    width: 55%;
+  }
+}
+
+.blogiumPost {
+  padding-top: 2em;
+}
+.blogiumPost-date {
+  font-family: Monaco, "Courier New", monospace;
+  font-size: .8em;
+  display: block;
+  text-align: center;
+}
+
+.blogiumPost-title {
+  text-align: center;
+  color: #888;
+  font-size: 2rem;
+  transition: all 250ms linear;
+}
+
+.blogiumPost-title:hover {
+  color: #555;
+}
+
+.blogiumPost-description {
+  // padding: 1em 2em;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+}
+
+.blogiumPost-description img {
+  width: 15rem;
+}
+
+.blogiumPost-description a {
+  display: inline-block;
+  color: #888;
+  transition: all 250ms linear 0;
+}
+
+.blogiumPost-description a:hover,
+.blogiumPost-description a:focus {
+  color: #555;
+}

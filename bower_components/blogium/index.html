@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blogium - 😈Page</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: whitesmoke;
+      color: #0F0F0F;
+    }
+  </style>
+</head>
+<body>
+  <h1>
+    BLOGIUM 😈
+  </h1>
+  <div class="mediumWrap"></div>
+  <button id="moreBtn"> click for more</button>
+  <script src="./dist/blogium.js"></script>
+  <script>
+  let blog = new Blogium({
+    username: '@atilafassina'
+  });
+
+  blog.on('blogium.success', response => { console.info(response) });
+  blog.on('blogium.error',   response => { console.error(response) });
+
+  </script>
+</body>
+</html>

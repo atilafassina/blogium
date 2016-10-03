@@ -1,0 +1,6 @@
+{
+  "name": "blogium",
+  "dependencies": {
+    "blogium": "^1.0.0"
+  }
+}

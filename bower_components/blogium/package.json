@@ -1,0 +1,51 @@
+{
+  "name": "blogium",
+  "version": "1.0.0",
+  "description": "turn medium into your cms",
+  "main": "src/blogium.js",
+  "scripts": {
+    "test": "node_modules/.bin/karma start karma.config.js",
+    "build-min": "webpack --optimize-minimize --output=dist --output-file=blogium.min.js",
+    "build-dev": "webpack",
+    "dev": "webpack-dev-server",
+    "prepublish": "npm run build-dev && npm run build-min"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atilafassina/blogium.git"
+  },
+  "keywords": [
+    "medium",
+    "blog",
+    "rss"
+  ],
+  "author": "@atilafassina",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/atilafassina/blogium/issues"
+  },
+  "homepage": "https://github.com/atilafassina/blogium#readme",
+  "devDependencies": {
+    "babel-core": "^6.14.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.5.0",
+    "chai": "^3.5.0",
+    "karma": "^1.3.0",
+    "karma-chai": "^0.1.0",
+    "karma-coverage": "^1.1.1",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-istanbul": "0.0.2",
+    "karma-mocha": "^1.2.0",
+    "karma-mocha-reporter": "^2.2.0",
+    "karma-sinon": "^1.0.5",
+    "karma-spec-reporter": "0.0.26",
+    "karma-webpack": "^1.8.0",
+    "mocha": "^3.0.2",
+    "sinon": "^1.17.6",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.1"
+  },
+  "dependencies": {
+    "tiny-emitter": "^1.1.0"
+  }
+}
