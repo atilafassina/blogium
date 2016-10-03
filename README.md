@@ -1,4 +1,4 @@
-![blogium-logo](https://github.com/atilafassina/blogium/blob/master/blogium.png)
+![blogium-logo](https://github.com/atilafassina/blogium/blob/master/blogium.png?raw=true)
 [![Build Status](https://img.shields.io/travis/atilafassina/blogium/master.svg?style=flat)](https://travis-ci.org/atilafassina/blogium)
 
 ## Install
@@ -28,7 +28,7 @@ Alternatively, you can always download a [.zip file](https://github.com/atilafas
 After including the script anyway suited you best, just instantiate `Blogium` with the desired set of options
 
 ```js
-let blog = new Blogium(options);
+const blog = new Blogium(options);
 ```
 
 ## Basic Usage
