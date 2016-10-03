@@ -1,0 +1,21 @@
+{
+  "name": "blogium",
+  "version": "1.0.0",
+  "description": "turn medium into your cms",
+  "license": "MIT",
+  "main": "dist/blogium.js",
+  "ignore": [
+    "/.*/",
+    "/demo/",
+    "/tests/",
+    "/.*",
+    "/bower.json",
+    "/karma.conf.js",
+    "/src"
+  ],
+  "keywords": [
+    "medium",
+    "blog",
+    "rss"
+  ]
+}

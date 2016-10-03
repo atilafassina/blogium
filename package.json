@@ -5,8 +5,10 @@
   "main": "src/blogium.js",
   "scripts": {
     "test": "node_modules/.bin/karma start karma.config.js",
-    "build": "webpack",
-    "dev": "webpack-dev-server"
+    "build-min": "webpack --optimize-minimize --output=dist --output-file=blogium.min.js",
+    "build-dev": "webpack",
+    "dev": "webpack-dev-server",
+    "prepublish": "npm run build-dev && npm run build-min"
   },
   "repository": {
     "type": "git",
@@ -35,9 +37,11 @@
     "karma-istanbul": "0.0.2",
     "karma-mocha": "^1.2.0",
     "karma-mocha-reporter": "^2.2.0",
+    "karma-sinon": "^1.0.5",
     "karma-spec-reporter": "0.0.26",
     "karma-webpack": "^1.8.0",
     "mocha": "^3.0.2",
+    "sinon": "^1.17.6",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.1"
   },
