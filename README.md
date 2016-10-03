@@ -1,4 +1,4 @@
-# Blogium 
+![blogium-logo](https://github.com/atilafassina/blogium/blob/master/blogium.png)
 [![Build Status](https://img.shields.io/travis/atilafassina/blogium/master.svg?style=flat)](https://travis-ci.org/atilafassina/blogium)
 
 ## Install

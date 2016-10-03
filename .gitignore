@@ -1,5 +1,2 @@
 node_modules
 npm-debug.log
-
-/dist
-src/use-case.js

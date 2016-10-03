@@ -1,14 +1,15 @@
 {
   "name": "blogium",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "turn medium into your cms",
   "main": "src/blogium.js",
   "scripts": {
     "test": "node_modules/.bin/karma start karma.config.js",
-    "build-min": "webpack --optimize-minimize --output=dist --output-file=blogium.min.js",
+    "build-min": "webpack --optimize-minimize --output=dist --output-filename=blogium.min.js",
     "build-dev": "webpack",
     "dev": "webpack-dev-server",
-    "prepublish": "npm run build-dev && npm run build-min"
+    "build": "npm run build-dev && npm run build-min",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
