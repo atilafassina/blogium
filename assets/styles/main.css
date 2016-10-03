@@ -17,13 +17,12 @@ a:hover {
 
 .top {
   width: 100vw;
-  height: 50vh;
-  background-color: #000;
-  color: #f1f1f1;
+  padding-bottom: 5rem;
+  background-color: #fefefe;
   font-size: 2em;
   display: flex;
   flex-flow: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
 
@@ -36,6 +35,21 @@ a:hover {
   font-size: .8em;
 }
 
+.logo {
+  width: 15em;
+  transition: all 250ms linear;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+}
+
+@media (max-width: 890px) {
+  .logo {
+    width: 80vw;
+  }
+}
+
 .gh-star {
   margin: 2em auto;
   text-align: center;
@@ -43,7 +57,20 @@ a:hover {
 
 .demo {
   margin: 3rem auto 0;
-  width: 80vw;
+  width: 70vw;
+  transition: all 250ms linear;
+}
+
+@media (max-width: 970px) {
+  .demo {
+    width: 80vw;
+  }
+}
+
+@media (max-width: 690px) {
+  .demo {
+    width: 90vw;
+  }
 }
 
 .demo_postList {
@@ -84,8 +111,18 @@ a:hover {
   text-align: center;
 }
 
-.changeUser_url {
+.changeUser_txt {
   font-size: 1.5rem;
+}
+
+.changeUser_txt::before {
+  content:attr(data-wide-text);
+}
+
+@media (max-width: 950px) {
+  .changeUser_txt::before {
+    content: attr(data-small-text);
+  }
 }
 
 .changeUser_input {
@@ -108,6 +145,12 @@ a:hover {
   cursor: pointer;
 }
 
+@media (max-width: 950px) {
+  .changeUser_btn {
+    margin-top: 2rem;
+  }
+}
+
 .changeUser_btn:focus,
 .changeUser_btn:hover {
   color: firebrick;
@@ -117,6 +160,19 @@ a:hover {
 .contentWrap {
   width: 70vw;
   margin: 0 auto;
+  transition: all 250ms linear;
+}
+
+@media (max-width: 970px) {
+  .contentWrap {
+    width: 80vw;
+  }
+}
+
+@media (max-width: 690px) {
+  .contentWrap {
+    width: 90vw;
+  }
 }
 
 h2 {
