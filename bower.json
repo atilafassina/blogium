@@ -1,6 +1,7 @@
 {
   "name": "blogium",
   "dependencies": {
-    "blogium": "^1.0.0"
+    "blogium": "^1.0.0",
+    "prism": "prismjs#^1.5.1"
   }
 }

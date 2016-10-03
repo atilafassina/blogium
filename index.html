@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <title>Blogium</title>
   <link rel="stylesheet" href="assets/styles/main.css">
+  <link href="bower_components/prism/themes/prism-okaidia.css" rel="stylesheet" />
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <script async defer src="bower_components/prism/prism.js"></script>
 </head>
 <body>
 <header class="top">
@@ -14,6 +17,98 @@
       Make Medium your CMS
     </strong>
   </header>
+  <aside class="gh-star">
+    <a class="github-button" href="https://github.com/atilafassina/blogium" data-style="mega" data-count-href="/atilafassina/blogium/stargazers" data-count-api="/repos/atilafassina/blogium#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star atilafassina/blogium on GitHub">Star</a>
+  </aside>
+
+  <article class="contentWrap">
+  <h2 id="install">
+    Install
+  </h2>
+  <p>
+    as a script inclusion
+  </p>
+  <pre><code class="language-markup"> &lt;script src="./dist/blogium.js"></script></code></pre>
+  <p>
+  as an npm package
+  </p>
+<pre><code class="language-bash">npm i --save blogium</code></pre>
+  <p>
+  as a bower package
+  </p>
+<pre><code class="language-bash">bower i --save blogium</code></pre>
+
+  Alternatively, you can always download a .zip file
+
+    <h2 id="get-started">
+      Get started
+    </h2>
+    <p>
+      After including the script anyway suited you best, just instantiate Blogium with the desired set of options
+    </p>
+
+<pre><code class="language-js">let blog = new Blogium(options);</code></pre>
+
+    <h2 id="basic-usage">
+      Basic Usage
+    </h2>
+    <p>
+    Blogium fires success and error event for the post request, you can listen to them:
+    </p>
+<pre><code class="language-js">
+blog.on('blogium.success', response => { console.info('I have posts!', response) });
+blog.on('blogium.error',   response => { console.error('Oops, something has gone wrong', response) });
+</code>
+</pre>
+
+    <h2 id="options">
+    Options
+    </h2>
+
+    <ul class="optionsList">
+      <li>
+        <strong>host (string)</strong>
+        <span>You can pass a string to what will be considered by Blogium your root host.</span>
+        <span>Default: <code>document.location.host</code></span>
+      </li>
+
+      <li>
+        <strong>targetBlank (boolean)</strong>
+        <span>If you want to set all outbound links (not directed to your host) as _blank.</span>
+        <span>Default: <code>true</code></span>
+      </li>
+
+      <li>
+        <strong>username (string)</strong>
+        <span>The Medium handler to fetch the RSS Feed from.</span>
+        <span>Default: <code>@Medium</code></span>
+      </li>
+
+      <li>
+        <strong>moreBtn (string)</strong>
+        <span>id to the more vouchers button.</span>
+        <span>Default: <code>#moreBtn</code></span>
+      </li>
+
+      <li>
+        <strong>Wrapper (class)</strong>
+        <span>class to the element(s) posts will be appended in.</span>
+        <span>Default: <code>.mediumWrap</code></span>
+      </li>
+
+      <li>
+        <strong>defaultTemplate (boolean)</strong>
+        <span>Weather to use the default template to list the posts or handle the data by yourself</span>
+        <span>Default: <code>true</code></span>
+      </li>
+
+      <li>
+        <strong>postLimit (number)</strong>
+        <span>Number of posts to be listed on each view. (infinite scroll is always on, posts are all cached on first request)</span>
+        <span>Default: <code>5</code></span>
+      </li>
+    </ul>
+  </article>
   <section class="demo">
     <nav class="changeUser">
       <span class="changeUser_url">http://medium.com/rss/</span>
@@ -27,7 +122,9 @@
   </section>
   <footer class="bottom">
     <span>
-      Licensed under MIT by Atila Fassina
+      <a href="https://atilafassina.mit-license.org/">
+        Licensed under MIT by Atila Fassina
+      </a>
     </span>
   </footer>
   <script src="bower_components/blogium/dist/blogium.js"></script>
