@@ -5,7 +5,7 @@
 
 - as a script inclusion
 
-```
+```html
 <script src="./dist/blogium.js"></script>
 ```
 
@@ -27,7 +27,7 @@ Alternatively, you can always download a [.zip file](https://github.com/atilafas
 
 After including the script anyway suited you best, just instantiate `Blogium` with the desired set of options
 
-```
+```js
 let blog = new Blogium(options);
 ```
 
@@ -35,8 +35,7 @@ let blog = new Blogium(options);
 
 **Blogium** fires `success` and `error` event for the post request, you can listen to them:
 
-```
-// considering blog
+```js
 blog.on('blogium.success', response => { console.info('I have posts!', response) });
 blog.on('blogium.error',   response => { console.error('Oops, something has gone wrong', response) });
 ```
