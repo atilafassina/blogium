@@ -16,8 +16,8 @@ a:hover {
 }
 
 .top {
-  width: 100vw;
   width: 100%;
+  width: 100vw;
   padding-bottom: 5rem;
   background-color: #fefefe;
   font-size: 2em;
