@@ -84,11 +84,26 @@ describe('Blogium', () => {
     });
   });
 
-  // describe('#getPosts', () => {
-  //   it('check if fake request is hey', function(done) {
+  describe('#getPosts', () => {
+    describe('XMLHttpRequest', () => {
+      let xhr, requests;
 
-  //   });
-  // });
+      before(() => {
+          xhr = sinon.useFakeXMLHttpRequest();
+          requests = [];
+          xhr.onCreate = req => requests.push(req);
+      });
+
+      after(() => { xhr.restore(); });
+
+      it('should request the default url', function() {
+        const blog = new Blogium();
+        const expected = "http://rss2json.com/api.json?rss_url=https%3A//medium.com/feed/@Medium";
+        assert.equal(requests.length, 1);
+        assert.equal(requests[0].url, expected);
+      });
+    });
+  });
 });
 
 
