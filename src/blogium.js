@@ -17,7 +17,7 @@ class Blogium extends Emitter {
     this.otherPosts = undefined;
     this.host = options.host || defaults.host;
     this.targetBlank = options.targetBlank || defaults.targetBlank;
-    this.url = `http://rss2json.com/api.json?rss_url=https%3A//medium.com/feed/${options.username || defaults.username}`;
+    this.url = defaults.url(options.username);
     this.moreBtn = document.querySelector(options.moreBtn) || document.querySelector(defaults.moreBtn);
     this.wrapper = document.querySelector(options.wrapper) || document.querySelector(defaults.wrapper);
     this.postLimit = options.postLimit || defaults.postLimit;

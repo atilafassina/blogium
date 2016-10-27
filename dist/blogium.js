@@ -27,7 +27,7 @@
         "use strict";
         function o(t) {
             return t && t.__esModule ? t : {
-                "default": t
+                default: t
             };
         }
         function r(t, e) {
@@ -74,11 +74,11 @@
                 key: "config",
                 value: function() {
                     var t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
-                    this.otherPosts = void 0, this.host = t.host || f["default"].host, this.targetBlank = t.targetBlank || f["default"].targetBlank, 
-                    this.url = "http://rss2json.com/api.json?rss_url=https%3A//medium.com/feed/" + (t.username || f["default"].username), 
-                    this.moreBtn = document.querySelector(t.moreBtn) || document.querySelector(f["default"].moreBtn), 
-                    this.wrapper = document.querySelector(t.wrapper) || document.querySelector(f["default"].wrapper), 
-                    this.postLimit = t.postLimit || f["default"].postLimit, this.defaultTemplate = t.defaultTemplate || f["default"].defaultTemplate;
+                    this.otherPosts = void 0, this.host = t.host || f.default.host, this.targetBlank = t.targetBlank || f.default.targetBlank, 
+                    this.url = "http://rss2json.com/api.json?rss_url=https%3A//medium.com/feed/" + (t.username || f.default.username), 
+                    this.moreBtn = document.querySelector(t.moreBtn) || document.querySelector(f.default.moreBtn), 
+                    this.wrapper = document.querySelector(t.wrapper) || document.querySelector(f.default.wrapper), 
+                    this.postLimit = t.postLimit || f.default.postLimit, this.defaultTemplate = t.defaultTemplate || f.default.defaultTemplate;
                 }
             }, {
                 key: "getPosts",
@@ -91,7 +91,7 @@
                         }, o.send();
                     }).then(function(e) {
                         t.emit("blogium.success", e), t.defaultTemplate && t.renderPosts(e.items);
-                    })["catch"](function(e) {
+                    }).catch(function(e) {
                         t.emit("blogium.error", e);
                     });
                 }
@@ -125,7 +125,7 @@
                     return '<li class="blogiumPost">\n        <a class="blogiumPost-link" href="' + t.link + '">\n          <span class="blogiumPost-date">' + e + '</span>\n          <h3 class="blogiumPost-title">' + t.title + '</h3>\n        </a>\n        <section class="blogiumPost-description">\n          ' + t.description + "\n        </section>\n      </li>";
                 }
             } ]), e;
-        }(l["default"]);
+        }(l.default);
         t.exports = p;
     }, function(t, e, n) {
         var o, o;
@@ -200,7 +200,7 @@
             defaultTemplate: !0,
             postLimit: 5
         };
-        e["default"] = n;
+        e.default = n;
     } ]);
 });
 //# sourceMappingURL=blogium.js.map
