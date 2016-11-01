@@ -11,6 +11,10 @@
 
 - as an npm package
 ```
+yarn add blogium
+```
+or
+```
 npm i --save blogium
 ```
 

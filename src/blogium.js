@@ -1,27 +1,20 @@
 import Emitter from '../node_modules/tiny-emitter/dist/tinyemitter.js';
-import defaults from './defaultOptions.js';
+import config from './config.js';
 
 class Blogium extends Emitter {
   constructor(options) {
     super();
-    this.config(options);
+    this.settings = config.basicSettings(options);
+    this.url = config.url(this.settings.username);
     this.getPosts();
     this.handleListener();
   }
 
   handleListener() {
-    this.moreBtn.addEventListener('click', this.morePosts.bind(this), false);
-  }
-
-  config(options = {}) {
-    this.otherPosts = undefined;
-    this.host = options.host || defaults.host;
-    this.targetBlank = options.targetBlank || defaults.targetBlank;
-    this.url = defaults.url(options.username);
-    this.moreBtn = document.querySelector(options.moreBtn) || document.querySelector(defaults.moreBtn);
-    this.wrapper = document.querySelector(options.wrapper) || document.querySelector(defaults.wrapper);
-    this.postLimit = options.postLimit || defaults.postLimit;
-    this.defaultTemplate = options.defaultTemplate || defaults.defaultTemplate;
+    const moreBtn = document.querySelector(this.settings.moreBtn) || null;
+    if (moreBtn) {
+      moreBtn.addEventListener('click', this.morePosts.bind(this), false);
+    }
   }
 
   getPosts() {
@@ -52,7 +45,7 @@ class Blogium extends Emitter {
     const allLinks = Array.from(scope.querySelectorAll('a'));
 
     allLinks.forEach((element) => {
-      if (element.href.includes(this.host)) {
+      if (element.href.includes(this.settings.host)) {
         element.target = '_self';
       } else {
         element.target = '_blank';
@@ -66,7 +59,7 @@ class Blogium extends Emitter {
 
     if (posts.length > this.postLimit - 1) {
       this.otherPosts = posts.slice(this.postLimit-1);
-      this.moreBtn.disabled = false;
+      this.settings.moreBtn.disabled = false;
     } else {
       this.otherPosts = undefined;
     }

@@ -59,26 +59,18 @@
             return function(e, n, o) {
                 return n && t(e.prototype, n), o && t(e, o), e;
             };
-        }(), a = n(2), l = o(a), c = n(3), f = o(c), p = function(t) {
+        }(), a = n(2), c = o(a), l = n(3), f = o(l), p = function(t) {
             function e(t) {
                 r(this, e);
                 var n = i(this, (e.__proto__ || Object.getPrototypeOf(e)).call(this));
-                return n.config(t), n.getPosts(), n.handleListener(), n;
+                return n.settings = f.default.basicSettings(t), n.url = f.default.url(n.settings.username), 
+                n.getPosts(), n.handleListener(), n;
             }
             return s(e, t), u(e, [ {
                 key: "handleListener",
                 value: function() {
-                    this.moreBtn.addEventListener("click", this.morePosts.bind(this), !1);
-                }
-            }, {
-                key: "config",
-                value: function() {
-                    var t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
-                    this.otherPosts = void 0, this.host = t.host || f.default.host, this.targetBlank = t.targetBlank || f.default.targetBlank, 
-                    this.url = "http://rss2json.com/api.json?rss_url=https%3A//medium.com/feed/" + (t.username || f.default.username), 
-                    this.moreBtn = document.querySelector(t.moreBtn) || document.querySelector(f.default.moreBtn), 
-                    this.wrapper = document.querySelector(t.wrapper) || document.querySelector(f.default.wrapper), 
-                    this.postLimit = t.postLimit || f.default.postLimit, this.defaultTemplate = t.defaultTemplate || f.default.defaultTemplate;
+                    var t = document.querySelector(this.settings.moreBtn) || null;
+                    t && t.addEventListener("click", this.morePosts.bind(this), !1);
                 }
             }, {
                 key: "getPosts",
@@ -100,7 +92,7 @@
                 value: function() {
                     var t = this, e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : document, n = Array.from(e.querySelectorAll("a"));
                     n.forEach(function(e) {
-                        e.href.includes(t.host) ? e.target = "_self" : e.target = "_blank";
+                        e.href.includes(t.settings.host) ? e.target = "_self" : e.target = "_blank";
                     });
                 }
             }, {
@@ -108,7 +100,7 @@
                 value: function(t) {
                     var e = this, n = "", o = document.createElement("ul");
                     t.length > this.postLimit - 1 ? (this.otherPosts = t.slice(this.postLimit - 1), 
-                    this.moreBtn.disabled = !1) : this.otherPosts = void 0, o.classList.add("postList"), 
+                    this.settings.moreBtn.disabled = !1) : this.otherPosts = void 0, o.classList.add("postList"), 
                     t.forEach(function(t, o) {
                         o < e.postLimit && (n += e.blogPostTemplate(t));
                     }), o.innerHTML = n, this.setLinkTarget(o), this.wrapper.appendChild(o);
@@ -125,7 +117,7 @@
                     return '<li class="blogiumPost">\n        <a class="blogiumPost-link" href="' + t.link + '">\n          <span class="blogiumPost-date">' + e + '</span>\n          <h3 class="blogiumPost-title">' + t.title + '</h3>\n        </a>\n        <section class="blogiumPost-description">\n          ' + t.description + "\n        </section>\n      </li>";
                 }
             } ]), e;
-        }(l.default);
+        }(c.default);
         t.exports = p;
     }, function(t, e, n) {
         var o, o;
@@ -136,11 +128,11 @@
                 function i(u, a) {
                     if (!n[u]) {
                         if (!e[u]) {
-                            var l = "function" == typeof o && o;
-                            if (!a && l) return o(u, !0);
+                            var c = "function" == typeof o && o;
+                            if (!a && c) return o(u, !0);
                             if (s) return s(u, !0);
-                            var c = new Error("Cannot find module '" + u + "'");
-                            throw c.code = "MODULE_NOT_FOUND", c;
+                            var l = new Error("Cannot find module '" + u + "'");
+                            throw l.code = "MODULE_NOT_FOUND", l;
                         }
                         var f = n[u] = {
                             exports: {}
@@ -192,13 +184,23 @@
             value: !0
         });
         var n = {
-            host: document.location.host || "",
-            username: "@Medium",
-            moreBtn: "#moreBtn",
-            wrapper: ".mediumWrap",
-            targetBlank: !0,
-            defaultTemplate: !0,
-            postLimit: 5
+            basicSettings: function() {
+                var t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}, e = {
+                    host: document.location.host || "",
+                    username: "@Medium",
+                    moreBtn: "#moreBtn",
+                    wrapper: ".mediumWrap",
+                    targetBlank: !0,
+                    defaultTemplate: !0,
+                    postLimit: 5,
+                    customTemplate: !1
+                };
+                for (var n in e) t[n] = t[n] || e[n];
+                return t;
+            },
+            url: function(t) {
+                return t.startsWith("@") || (t = "@" + t), "http://rss2json.com/api.json?rss_url=https%3A//medium.com/feed/" + t;
+            }
         };
         e.default = n;
     } ]);
