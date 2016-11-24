@@ -1,6 +1,6 @@
 /*!
  * 
- * Blogium v1.0.0
+ * Blogium v1.2.0
  * https://github.com/atilafassina/blogium
  * 
  * Licensed MIT © Atila Fassina
@@ -59,7 +59,7 @@
             return function(e, n, o) {
                 return n && t(e.prototype, n), o && t(e, o), e;
             };
-        }(), a = n(2), c = o(a), l = n(3), f = o(l), p = function(t) {
+        }(), a = n(2), l = o(a), c = n(3), f = o(c), p = function(t) {
             function e(t) {
                 r(this, e);
                 var n = i(this, (e.__proto__ || Object.getPrototypeOf(e)).call(this));
@@ -76,15 +76,10 @@
                 key: "getPosts",
                 value: function() {
                     var t = this;
-                    new Promise(function(e, n) {
-                        var o = new XMLHttpRequest();
-                        o.open("GET", t.url, !0), o.onreadystatechange = function() {
-                            4 === o.readyState && 200 === o.status ? e(JSON.parse(o.response)) : 200 !== o.status && n(o.response);
-                        }, o.send();
+                    fetch(this.url).then(function(e) {
+                        return 200 !== e.status ? void t.emit("blogium.error", e) : e.json();
                     }).then(function(e) {
-                        t.emit("blogium.success", e), t.defaultTemplate && t.renderPosts(e.items);
-                    }).catch(function(e) {
-                        t.emit("blogium.error", e);
+                        t.emit("blogium.success", e), t.settings.defaultTemplate && t.renderPosts(e.items);
                     });
                 }
             }, {
@@ -98,12 +93,12 @@
             }, {
                 key: "renderPosts",
                 value: function(t) {
-                    var e = this, n = "", o = document.createElement("ul");
-                    t.length > this.postLimit - 1 ? (this.otherPosts = t.slice(this.postLimit - 1), 
-                    this.settings.moreBtn.disabled = !1) : this.otherPosts = void 0, o.classList.add("postList"), 
-                    t.forEach(function(t, o) {
-                        o < e.postLimit && (n += e.blogPostTemplate(t));
-                    }), o.innerHTML = n, this.setLinkTarget(o), this.wrapper.appendChild(o);
+                    var e = this, n = document.querySelector(this.settings.wrapper) || null, o = "", r = document.createElement("ul");
+                    t.length > this.settings.postLimit - 1 ? (this.otherPosts = t.slice(this.postLimit - 1), 
+                    this.settings.moreBtn.disabled = !1) : this.otherPosts = void 0, r.classList.add("postList"), 
+                    t.forEach(function(t, n) {
+                        n < e.settings.postLimit && (o += e.blogPostTemplate(t));
+                    }), r.innerHTML = o, this.setLinkTarget(r), n ? n.appendChild(r) : console.error("we need a container");
                 }
             }, {
                 key: "morePosts",
@@ -117,7 +112,7 @@
                     return '<li class="blogiumPost">\n        <a class="blogiumPost-link" href="' + t.link + '">\n          <span class="blogiumPost-date">' + e + '</span>\n          <h3 class="blogiumPost-title">' + t.title + '</h3>\n        </a>\n        <section class="blogiumPost-description">\n          ' + t.description + "\n        </section>\n      </li>";
                 }
             } ]), e;
-        }(c.default);
+        }(l.default);
         t.exports = p;
     }, function(t, e, n) {
         var o, o;
@@ -128,11 +123,11 @@
                 function i(u, a) {
                     if (!n[u]) {
                         if (!e[u]) {
-                            var c = "function" == typeof o && o;
-                            if (!a && c) return o(u, !0);
+                            var l = "function" == typeof o && o;
+                            if (!a && l) return o(u, !0);
                             if (s) return s(u, !0);
-                            var l = new Error("Cannot find module '" + u + "'");
-                            throw l.code = "MODULE_NOT_FOUND", l;
+                            var c = new Error("Cannot find module '" + u + "'");
+                            throw c.code = "MODULE_NOT_FOUND", c;
                         }
                         var f = n[u] = {
                             exports: {}

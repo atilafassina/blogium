@@ -1,12 +1,28 @@
 'use strict';
 
-var webpack = require('webpack'),
+
+
+const webpack = require('webpack'),
+  chalk = require('chalk'),
+  npmVersion = require('./package.json').version,
+  bowerVersion = require('./bower.json').version,
+  version = checkVersions(npmVersion, bowerVersion),
   banner = `
-Blogium v1.0.0
+Blogium v${version}
 https://github.com/atilafassina/blogium
 
 Licensed MIT © Atila Fassina
 `;
+
+function checkVersions(npm, bower) {
+  if (npm === bower) {
+    return npm;
+  } else {
+    throw new Error(chalk.red.bold('bower.json and package.json versions must be the same'));
+  }
+
+}
+
 
 module.exports = {
   entry: [

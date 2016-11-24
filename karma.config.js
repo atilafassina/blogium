@@ -4,7 +4,7 @@ webpackConfig.entry = {};
 module.exports = function(karma) {
   karma.set({
     basePath: '',
-    frameworks: ['mocha', 'chai', 'sinon'],
+    frameworks: ['mocha', 'chai'],
 
     reporters: ['mocha'],
     port: 9876,
