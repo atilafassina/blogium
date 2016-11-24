@@ -1,6 +1,6 @@
 {
   "name": "blogium",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "turn medium into your cms",
   "license": "MIT",
   "main": "dist/blogium.js",
