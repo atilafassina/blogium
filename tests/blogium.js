@@ -1,8 +1,12 @@
 import Blogium from '../src/blogium.js';
+import fetchMock from 'fetch-mock';
 
 describe('Blogium', () => {
+  let blog;
 
-  before(() => {
+  beforeEach(() => {
+    fetchMock.get('*', { "hello": "world"});
+
     global.wrapper = document.createElement('div');
     global.wrapper.setAttribute('class', 'mediumWrap');
 
@@ -11,13 +15,18 @@ describe('Blogium', () => {
 
     document.body.appendChild(global.wrapper);
     document.body.appendChild(global.moreBtn);
+
+    blog = new Blogium({
+      host: 'atilafassina.com'
+    });
+  });
+
+  afterEach(() => {
+      fetchMock.restore();
   });
 
   describe('#constructor', () => {
     it('check if Blog is an instance of Blogium', () => {
-      const blog = new Blogium({
-        host: 'atilafassina.com'
-      });
 
       assert.instanceOf(blog, Blogium, 'blog is an instance of Blogium');
     });
@@ -25,9 +34,6 @@ describe('Blogium', () => {
 
   describe('#blogPostTemplate', () => {
     it('should return a string with html code', () => {
-      const blog = new Blogium({
-        host: 'atilafassina.com'
-      });
 
       const mockPost = {
         items: [{
@@ -48,10 +54,6 @@ describe('Blogium', () => {
 
   describe('#setLinkTarget', () => {
     it('should change target of outbound links to _blank', () => {
-      const blog = new Blogium({
-        host: 'atilafassina.com'
-      });
-
       for(let i=0; i < 10; i++) {
         let newLink = document.createElement('a');
         newLink.href = 'github.com';
@@ -67,10 +69,6 @@ describe('Blogium', () => {
     });
 
     it('should keep target of inbound links as _self', () => {
-      const blog = new Blogium({
-        host: 'atilafassina.com'
-      });
-
       for(let i=0; i < 10; i++) {
         let otherLink = document.createElement('a');
         otherLink.href = 'http://atilafassina.com';
@@ -84,27 +82,13 @@ describe('Blogium', () => {
     });
   });
 
-  describe('#getPosts', () => {
-    describe('XMLHttpRequest', () => {
-      let xhr, requests;
+  describe('#fetch-test', () => {
+    it('should request the default url', () => {
+      assert.equal(fetchMock.lastUrl(), 'http://rss2json.com/api.json?rss_url=https%3A//medium.com/feed/@Medium');
+    });
 
-      before(() => {
-          xhr = sinon.useFakeXMLHttpRequest();
-          requests = [];
-          xhr.onCreate = req => requests.push(req);
-      });
-
-      after(() => { xhr.restore(); });
-
-      it('should request the default url', function() {
-        const blog = new Blogium();
-        const expected = "http://rss2json.com/api.json?rss_url=https%3A//medium.com/feed/@Medium";
-        assert.equal(requests.length, 1);
-        assert.equal(requests[0].url, expected);
-      });
+    it('should request only once', () => {
+      assert.equal(fetchMock.calls('*').length, 1);
     });
   });
 });
-
-
-

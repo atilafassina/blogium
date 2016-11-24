@@ -18,26 +18,22 @@ class Blogium extends Emitter {
   }
 
   getPosts() {
-    let getPosts = new Promise((resolve, reject) => {
-      let posts = new XMLHttpRequest();
+    fetch(this.url)
 
-      posts.open("GET", this.url, true);
+    .then(response => {
+      if (response.status !== 200) {
+        this.emit('blogium.error', response);
+        return;
+      }
 
-      posts.onreadystatechange = function () {
-        if (posts.readyState === 4 && posts.status === 200) {
-          resolve(JSON.parse(posts.response));
-        } else if(posts.status !== 200) {
-          reject(posts.response);
-        }
-      };
-      posts.send();
+      return response.json();
     })
-    .then((postList)=> {
+
+    .then(postList => {
       this.emit('blogium.success', postList);
-      if (this.defaultTemplate) this.renderPosts(postList.items);
-    })
-    .catch((response) => {
-      this.emit('blogium.error', response);
+
+      if (this.settings.defaultTemplate) this.renderPosts(postList.items);
+
     });
   }
 
@@ -54,10 +50,11 @@ class Blogium extends Emitter {
   }
 
   renderPosts(posts) {
+    const wrapper = document.querySelector(this.settings.wrapper) || null;
     let cachedPosts = '',
         ul = document.createElement('ul');
 
-    if (posts.length > this.postLimit - 1) {
+    if (posts.length > this.settings.postLimit - 1) {
       this.otherPosts = posts.slice(this.postLimit-1);
       this.settings.moreBtn.disabled = false;
     } else {
@@ -67,15 +64,20 @@ class Blogium extends Emitter {
     ul.classList.add('postList');
 
     posts.forEach((post, index) => {
-      if (index < this.postLimit) {
+      if (index < this.settings.postLimit) {
         cachedPosts += this.blogPostTemplate(post);
       }
-
     });
 
     ul.innerHTML = cachedPosts;
     this.setLinkTarget(ul);
-    this.wrapper.appendChild(ul);
+
+    if (!wrapper) {
+      console.error('we need a container');
+
+    } else {
+      wrapper.appendChild(ul);
+    }
   }
 
   morePosts() {
