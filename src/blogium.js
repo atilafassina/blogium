@@ -56,7 +56,7 @@ class Blogium extends Emitter {
 
     if (posts.length > this.settings.postLimit - 1) {
       this.otherPosts = posts.slice(this.postLimit-1);
-      this.settings.moreBtn.disabled = false;
+      // this.settings.moreBtn.disabled = false;
     } else {
       this.otherPosts = undefined;
     }
@@ -87,17 +87,27 @@ class Blogium extends Emitter {
     this.renderPosts(this.otherPosts);
   }
 
-  blogPostTemplate(post) {
-    let postDate = new Date(post.pubDate).toDateString();
+  buildCategories(array) {
+    const list = array.map( category  => {
+      return `<li class="homePost-tagItem">${category}</li>`
+    })
+
+    const categories = list.join('')
+
+    return (`<ul class="blogiumPost-categories">
+        ${categories}
+      </ul>`)
+  }
+
+  blogPostTemplate({ pubDate, link, title, categories }) {
+    let postDate = new Date(pubDate).toDateString();
 
     return `<li class="blogiumPost">
-        <a class="blogiumPost-link" href="${post.link}">
+        <a class="blogiumPost-link" href="${link}">
           <span class="blogiumPost-date">${postDate}</span>
-          <h3 class="blogiumPost-title">${post.title}</h3>
+          <h3 class="blogiumPost-title">${title}</h3>
         </a>
-        <section class="blogiumPost-description">
-          ${post.description}
-        </section>
+        ${this.settings.showCategories && this.buildCategories(categories)}
       </li>`;
   };
 }

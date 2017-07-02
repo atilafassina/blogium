@@ -81,6 +81,11 @@ Number of posts to be listed on each view. (infinite scroll is always on, posts 
 
 **Default**: `5`
 
+### showCategories (boolean)
+Show Medium categories for each post.
+
+**Default**: `true`
+
 ---
 
 [MIT License - Atila Fassina](https://atilafassina.mit-license.org/)

@@ -1,6 +1,6 @@
 /*!
  * 
- * Blogium v1.2.0
+ * Blogium v2.0.0
  * https://github.com/atilafassina/blogium
  * 
  * Licensed MIT © Atila Fassina
@@ -94,9 +94,8 @@
                 key: "renderPosts",
                 value: function(t) {
                     var e = this, n = document.querySelector(this.settings.wrapper) || null, o = "", r = document.createElement("ul");
-                    t.length > this.settings.postLimit - 1 ? (this.otherPosts = t.slice(this.postLimit - 1), 
-                    this.settings.moreBtn.disabled = !1) : this.otherPosts = void 0, r.classList.add("postList"), 
-                    t.forEach(function(t, n) {
+                    t.length > this.settings.postLimit - 1 ? this.otherPosts = t.slice(this.postLimit - 1) : this.otherPosts = void 0, 
+                    r.classList.add("postList"), t.forEach(function(t, n) {
                         n < e.settings.postLimit && (o += e.blogPostTemplate(t));
                     }), r.innerHTML = o, this.setLinkTarget(r), n ? n.appendChild(r) : console.error("we need a container");
                 }
@@ -106,10 +105,18 @@
                     this.otherPosts && (this.moreBtn.disabled = !0, this.renderPosts(this.otherPosts));
                 }
             }, {
+                key: "buildCategories",
+                value: function(t) {
+                    var e = t.map(function(t) {
+                        return '<li class="homePost-tagItem">' + t + "</li>";
+                    }), n = e.join("");
+                    return '<ul class="blogiumPost-categories">\n          ' + n + "\n        </ul>";
+                }
+            }, {
                 key: "blogPostTemplate",
                 value: function(t) {
-                    var e = new Date(t.pubDate).toDateString();
-                    return '<li class="blogiumPost">\n        <a class="blogiumPost-link" href="' + t.link + '">\n          <span class="blogiumPost-date">' + e + '</span>\n          <h3 class="blogiumPost-title">' + t.title + '</h3>\n        </a>\n        <section class="blogiumPost-description">\n          ' + t.description + "\n        </section>\n      </li>";
+                    var e = t.pubDate, n = t.link, o = t.title, r = t.categories, i = new Date(e).toDateString();
+                    return console.log("odod"), '<li class="blogiumPost">\n        <a class="blogiumPost-link" href="' + n + '">\n          <span class="blogiumPost-date">' + i + '</span>\n          <h3 class="blogiumPost-title">' + o + "</h3>\n        </a>\n        " + (this.settings.showCategories && this.buildCategories(r)) + "\n      </li>";
                 }
             } ]), e;
         }(l.default);
@@ -188,7 +195,8 @@
                     targetBlank: !0,
                     defaultTemplate: !0,
                     postLimit: 5,
-                    customTemplate: !1
+                    customTemplate: !1,
+                    showCategories: !0
                 };
                 for (var n in e) t[n] = t[n] || e[n];
                 return t;

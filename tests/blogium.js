@@ -36,18 +36,15 @@ describe('Blogium', () => {
     it('should return a string with html code', () => {
 
       const mockPost = {
-        items: [{
-          title: "post title",
-          link: "http://post.url",
-          pubDate: "Wed, 21 Sep 2016 12:50:35 GMT",
-          author: "Átila Fassina",
-          description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui excepturi sit modi.",
-          content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto saepe temporibus iure odio eaque dolor."
-        }]
+        title: "post title",
+        link: "http://post.url",
+        pubDate: "Wed, 21 Sep 2016 12:50:35 GMT",
+        author: "Átila Fassina",
+        categories: ['writing', 'medium', 'cms'],
+        content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto saepe temporibus iure odio eaque dolor."
       };
 
       let post = blog.blogPostTemplate(mockPost);
-
       assert.equal(typeof post, 'string', 'post must be a string');
     });
   });

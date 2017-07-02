@@ -10,7 +10,8 @@ const config = {
       targetBlank: true,
       defaultTemplate: true,
       postLimit: 5,
-      customTemplate: false
+      customTemplate: false,
+      showCategories: true
     }
 
     for (const prop in defaults) {
@@ -21,7 +22,6 @@ const config = {
   },
 
   url: username => {
-    debugger;
     if (!username.startsWith('@')) username = `@${username}`;
 
   	return `http://rss2json.com/api.json?rss_url=https%3A//medium.com/feed/${username}`;

@@ -1,6 +1,6 @@
 {
   "name": "blogium",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "turn medium into your cms",
   "main": "src/blogium.js",
   "scripts": {
@@ -25,7 +25,7 @@
   "bugs": {
     "url": "https://github.com/atilafassina/blogium/issues"
   },
-  "homepage": "https://github.com/atilafassina/blogium#readme",
+  "homepage": "http://atilafassina.com/blogium",
   "devDependencies": {
     "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",
