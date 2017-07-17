@@ -1,6 +1,6 @@
 /*!
  * 
- * Blogium v2.0.0
+ * Blogium v2.0.1
  * https://github.com/atilafassina/blogium
  * 
  * Licensed MIT © Atila Fassina
@@ -110,13 +110,13 @@
                     var e = t.map(function(t) {
                         return '<li class="homePost-tagItem">' + t + "</li>";
                     }), n = e.join("");
-                    return '<ul class="blogiumPost-categories">\n          ' + n + "\n        </ul>";
+                    return '<ul class="blogiumPost-categories">\n        ' + n + "\n      </ul>";
                 }
             }, {
                 key: "blogPostTemplate",
                 value: function(t) {
                     var e = t.pubDate, n = t.link, o = t.title, r = t.categories, i = new Date(e).toDateString();
-                    return console.log("odod"), '<li class="blogiumPost">\n        <a class="blogiumPost-link" href="' + n + '">\n          <span class="blogiumPost-date">' + i + '</span>\n          <h3 class="blogiumPost-title">' + o + "</h3>\n        </a>\n        " + (this.settings.showCategories && this.buildCategories(r)) + "\n      </li>";
+                    return '<li class="blogiumPost">\n        <a class="blogiumPost-link" href="' + n + '">\n          <span class="blogiumPost-date">' + i + '</span>\n          <h3 class="blogiumPost-title">' + o + "</h3>\n        </a>\n        " + (this.settings.showCategories && this.buildCategories(r)) + "\n      </li>";
                 }
             } ]), e;
         }(l.default);
@@ -202,7 +202,7 @@
                 return t;
             },
             url: function(t) {
-                return t.startsWith("@") || (t = "@" + t), "http://rss2json.com/api.json?rss_url=https%3A//medium.com/feed/" + t;
+                return t.startsWith("@") || (t = "@" + t), "//rss2json.com/api.json?rss_url=https%3A//medium.com/feed/" + t;
             }
         };
         e.default = n;

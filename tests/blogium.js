@@ -37,7 +37,7 @@ describe('Blogium', () => {
 
       const mockPost = {
         title: "post title",
-        link: "http://post.url",
+        link: "https://post.url",
         pubDate: "Wed, 21 Sep 2016 12:50:35 GMT",
         author: "Átila Fassina",
         categories: ['writing', 'medium', 'cms'],
@@ -68,7 +68,7 @@ describe('Blogium', () => {
     it('should keep target of inbound links as _self', () => {
       for(let i=0; i < 10; i++) {
         let otherLink = document.createElement('a');
-        otherLink.href = 'http://atilafassina.com';
+        otherLink.href = 'https://atilafassina.com';
         otherLink.setAttribute('target', '_self');
         global.wrapper.appendChild(otherLink);
       }
@@ -81,7 +81,7 @@ describe('Blogium', () => {
 
   describe('#fetch-test', () => {
     it('should request the default url', () => {
-      assert.equal(fetchMock.lastUrl(), 'http://rss2json.com/api.json?rss_url=https%3A//medium.com/feed/@Medium');
+      assert.equal(fetchMock.lastUrl(), '//rss2json.com/api.json?rss_url=https%3A//medium.com/feed/@Medium');
     });
 
     it('should request only once', () => {
