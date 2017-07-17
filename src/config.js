@@ -24,7 +24,7 @@ const config = {
   url: username => {
     if (!username.startsWith('@')) username = `@${username}`;
 
-  	return `http://rss2json.com/api.json?rss_url=https%3A//medium.com/feed/${username}`;
+  	return `//rss2json.com/api.json?rss_url=https%3A//medium.com/feed/${username}`;
   }
 };
 
