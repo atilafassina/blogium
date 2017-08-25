@@ -6,7 +6,7 @@ describe('Blogium', () => {
 
   const wrapperLinks = (href, target) => {
     for(let i = 0; i < 10; i++) {
-      let element = document.createElement('a');
+      const element = document.createElement('a');
       element.href = href;
       element.setAttribute('target', target);
       global.wrapper.appendChild(element);
