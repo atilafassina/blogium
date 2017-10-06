@@ -1,6 +1,8 @@
 <a href="http://atilafassina.com/blogium" target="_blank"><img src="https://github.com/atilafassina/blogium/blob/master/blogium.png?raw=true" alt="logo-Blogium" /></a>
 [![Build Status](https://img.shields.io/travis/atilafassina/blogium/master.svg?style=flat)](https://travis-ci.org/atilafassina/blogium)
 
+> DEPRECATED: to use this, please refer to [Blogium-Service/examples/vanilla](https://github.com/atilafassina/blogium-service/tree/master/examples/vanilla)
+
 ## Install
 
 - as a script inclusion
